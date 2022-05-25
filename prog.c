@@ -49,10 +49,11 @@ IntNode* createNode(int x)
 	return newInt;
 }
 
+
 //free all the memmry allocated in our createNode function.
 //in our IntNode we allocated once so we need only to free IntNode* in.
 //if for example we allocated memory for other vairables we would need to free them to. e.g GenericNode->name=(char*)malloc(sizeof(char)*MAXLEN) :: this would require free(GenericNode->name) 
-//
+
 void freeNode(IntNode* in)
 {
 	free(in);
@@ -91,6 +92,7 @@ void freeList(IntNode** head)
 
 //printing the value Node
 //intput:pointer to the Node.
+
 void printNode(IntNode* i)
 {
 	printf("value=%d\n", i->value);
@@ -106,8 +108,10 @@ void printList(IntNode* head)
 }
 
 /*
-insert functions
+INSERT FUNCTIONS
 insert function always pass the head as double pointer. e.g IntNode** head.
+we distinguish between 2 case:insert at the beginning and insert at end/middle.
+insert at beginning is simple: all we need it link newNode to the head and change the head value to newNode. 
 */
 
 
@@ -176,22 +180,24 @@ bool insertAt(IntNode** head, IntNode* p, IntNode* newInt)
 }
 
 
-//delete function
+//REMOVE FUNCTION
 //delete function always pass the head as double pointer. e.g IntNode** head.
-//in this cheat sheet i wrote only one delete function. but i encourage you to wrote more function. such as deleteEnd ,deleteStart ,e.t.c..
+//in this cheat sheet i wrote only one delete function. but i encourage you to write more functions. such as deleteEnd ,deleteStart ,e.t.c..
 
-void deleteNodeRecursive(IntNode** head, IntNode* d)
+void removeNodeRecursive(IntNode** head, IntNode* d)
 {
+	//if list is empty
 	if (!*head)
 		return;
-
+	//if we want to remove the first node
 	if (*head == d)
 	{
 		(*head) = (*head)->next;
 		return;
 	}
-
+	
 	IntNode* tmp = (*head)->next;
+	//if tmp is null. d is not in the list.
 	if (!tmp) return;
 	if (d == tmp)
 	{
@@ -201,11 +207,11 @@ void deleteNodeRecursive(IntNode** head, IntNode* d)
 	}
 	else
 	{
-		deleteNodeRecursive(&tmp, d);
+		removeNodeRecursive(&tmp, d);
 	}
 }
 
-void deleteNode(IntNode** head, IntNode* d)
+void removeNode(IntNode** head, IntNode* d)
 {
 	IntNode* p = *head;
 	IntNode* dNode = NULL;
