@@ -68,7 +68,7 @@ void freeListRecursive(IntNode** head)
 
 	IntNode* next = (*head)->next;
 	freeListRecursive(&next);
-	free(*head);
+	freeNode(*head);
 	//after we free *head, *head is not NULL. so we need to assign NULL to *head.
 	//beacuse we pass double-pointer we assure that the pointer that passed is also NULL.
 	*head = NULL;
