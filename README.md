@@ -1,2 +1,2 @@
 # LinkedList
-linked list cheet sheet in c
+linked list cheet sheet in c for my students
